@@ -4,7 +4,18 @@ metadata:
   name: ingress
 spec:
   tls:
-  - secretName: ssl-micheh
-  backend:
-    serviceName: wordpress
-    servicePort: 80
+  - hosts:
+    - micheh.com
+    secretName: micheh-tls
+  rules:
+    - host: micheh.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: wordpress
+            servicePort: 80
+        - path: /*
+          backend:
+            serviceName: wordpress
+            servicePort: 80
